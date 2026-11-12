@@ -1,0 +1,9 @@
+# Keep source/docs LF on every platform.
+* text=auto eol=lf
+
+# Generated / binary files.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary

@@ -1,0 +1,52 @@
+{
+  "cli": "guardian",
+  "jira": {
+    "base_url": "https://jira.example.com",
+    "auth_scheme": "Bearer",
+    "token": "",
+    "verify_tls": false,
+    "allow_writes": true,
+    "me": "your.name",
+    "bot_mark": "[super-agent]",
+    "default_jql": "project = PROJ AND issuetype = Bug AND assignee = currentUser() AND created >= startOfDay() AND resolution = Unresolved ORDER BY created DESC"
+  },
+  "watch": {
+    "interval_minutes": 15,
+    "max_items_per_tick": 3,
+    "max_tracked_per_tick": 12,
+    "in_flight_timeout_minutes": 40,
+    "follow_up_on_new_comment": true,
+    "state_file": "data/watch-state.json",
+    "outbox_dir": "workspace/outbox",
+    "brief_dir": "workspace/jira",
+    "prompt_dir": "workspace/prompt",
+    "attach_dir": "workspace/attach",
+    "pin_cards": [],
+    "ignore_cards": [],
+    "status_in_progress": "In Progress",
+    "status_done": "Ready for Testing",
+    "done_statuses": ["Ready for Testing", "Ready For UAT", "UAT", "Done", "Closed", "Resolved"]
+  },
+  "dev": {
+    "enabled": true,
+    "worktree_root": "workspace/repos",
+    "base_branch": "",
+    "commit_types": ["feat", "fix", "chore", "docs", "refactor", "test"],
+    "repos": {
+      "my-service": {
+        "src": "D:\\Code\\my-service",
+        "lang": "python",
+        "verify": "python -m compileall -q src"
+      }
+    }
+  },
+  "llm": {
+    "provider": "openai-compatible",
+    "base_url": "https://your-gateway/v1",
+    "api_key": "",
+    "model": "gpt-5.6-terra",
+    "vision_model": "gpt-5.6-terra",
+    "timeout": 180
+  },
+  "prompts": {}
+}

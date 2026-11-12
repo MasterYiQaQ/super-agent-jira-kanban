@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jira-guardian"
+version = "0.3.0"
+description = "JIRA 值守链路：把指给你的卡变成 can-do 的会话任务，改完代码写回评论并挪卡"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "JIRA Guardian Contributors" }]
+# 零第三方依赖：标准库 + 本机 git
+dependencies = []
+
+[project.scripts]
+guardian = "jira_guardian.cli:main"
+
+[tool.setuptools]
+packages = ["jira_guardian"]
+
+[tool.setuptools.package-data]
+jira_guardian = ["templates/*.md"]
