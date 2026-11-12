@@ -134,7 +134,7 @@ class FirstRound(Base):
         jira = FakeJira({"P-1": {}})
         item = self.tick(jira).scan()["items"][0]
         prompt = Path(item["prompt_file"]).read_text(encoding="utf-8")
-        for needle in ("worktree prepare", "commit -m", "不要用 # / ## / ###", "回执", "仓库地图"):
+        for needle in ("worktree prepare", "commit -m", "不要用 # / ## / ###", "回执", "仓库地图", "业务理解偏差", "未改代码"):
             self.assertIn(needle, prompt)
         self.assertNotIn("{{", prompt)
 

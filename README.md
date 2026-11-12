@@ -64,6 +64,8 @@ guardian tick seed --jql "project = PROJ AND assignee = currentUser() AND resolu
 | 掉出 JQL 窗口但 `active=true` | 按 key 补拉，评论照样跟进 |
 | 有了 `resolution` | 从跟进清单摘掉 |
 
+卡片标题是 Bug **不等于一定改代码**。执行会话会先读卡和代码：若证明现有行为符合已确认规则，而偏差来自需求理解、验收口径或使用方式，执行会话必须写 `status=blocked` 回执并提供代码证据、差异和待确认问题；主路由仍会将该结论追加为 JIRA 评论，但不会提交、推分支或挪完成态。
+
 设计上的两个硬边界：
 
 - **状态变化从不单独派单**。执行会话开工第一步就是自己把卡挪到 `In Progress`、干完挪到 `Ready for Testing`；如果"状态变了就派"，每张卡都会自己触发自己两轮。

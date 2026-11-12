@@ -25,6 +25,7 @@
   回执 `status == "ok"` 且 `pushed == true` 时，确认卡已经在 `{{DONE_STATUS}}`；不在就补一次流转：
   {{CLI}} jira transition <KEY> --to "{{DONE_STATUS}}"
   `blocked` / `failed` 的回执**不要**挪卡，也不要 release 占位（留给人看）。
+  其中 `blocked` 若 summary/comment 表明“业务理解/需求口径偏差，未改代码”，仍必须在第 3 步把 comment 正常追加到 JIRA；它是需要需求方澄清的有效结论，不是静默失败。
 
 第 5 步 派单（一张 JIRA 卡固定对应一张看板卡）：
   - 该卡已有的看板卡还在 running → 跳过，别开第二摊活。
