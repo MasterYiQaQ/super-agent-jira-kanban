@@ -155,7 +155,15 @@ guardian tick seed --jql "project = PROJ AND assignee = currentUser() AND resolu
 
 要跑完整的「定时扫描 → 自动开执行会话 → 回写」闭环，DSH 里必须已安装并启用**任务看板插件**。它提供 cron、看板卡和 `reuseSession` / rerun；本 Python 包不替代这些宿主能力。
 
-没有任务看板时，`guardian jira` / `tick` / `worktree` / `vision` 依旧能在命令行使用；只需用其他调度器和会话执行器替代下文的看板操作。安装说明见 [setup.md](setup.md)。
+安装（DSH desktop profile）：
+
+```powershell
+dsh plugin --profile desktop add @linxin666/dsh-client-ui-task-board
+```
+
+若 `dsh` 不在 PATH，调用 DSH 自带的 `dsh.cmd`；安装后关闭并重新打开 DSH GUI。能打开任务看板、创建卡片并在详情中看到「定时运行」即为成功。先用 `dsh plugin --profile desktop why @linxin666/dsh-client-ui-task-board` 检查已装状态，避免重复安装。完整步骤见 [setup.md](setup.md)。
+
+没有任务看板时，`guardian jira` / `tick` / `worktree` / `vision` 依旧能在命令行使用；只需用其他调度器和会话执行器替代下文的看板操作。
 
 看板卡（cron 唤醒）的 prompt 只写六步：`tick scan --commit` → `tick outbox` → 发评论+ack → 校验收口状态 → 建/续跑执行卡 + `tick claim` → 只回一行。
 

@@ -19,7 +19,29 @@
 打开任务看板；若能创建卡片、看到「定时运行」并设置 cron，就已经安装，无需重复装。
 ```
 
-若没有任务看板，需要由 DSH 管理员或使用者安装与启用该插件；安装后刷新/重启 DSH GUI，再继续本文 Step 1。**不要把 GitLab 地址或 JIRA token 写进看板卡的 prompt**，凭据只放实例的 `config.json` 或环境变量。
+若没有任务看板，**先安装官方已验证的任务看板插件**（DSH 桌面 profile）：
+
+```powershell
+# 在 DSH 自带 CLI 可用的终端执行；普通安装会走当前 npm registry。
+dsh plugin --profile desktop add @linxin666/dsh-client-ui-task-board
+```
+
+如果 `dsh` 不在 PATH，使用 DSH 安装目录里的命令（Windows 示例）：
+
+```powershell
+& "D:\DeepSeek Harness\resources\runtime\cli\bin\dsh.cmd" plugin --profile desktop add @linxin666/dsh-client-ui-task-board
+```
+
+安装完成后，**关闭并重新打开 DSH GUI**（或重启 DSH Web），然后验证：
+
+1. 打开「任务看板」；
+2. 能新建卡片；
+3. 卡片详情里能看到「定时运行」并填写 cron；
+4. agent 能调用 `task_board_create`、`task_board_run`、`task_board_schedule`。
+
+若使用的不是 `desktop` profile，先确认实际 profile 名，再把 `--profile desktop` 换掉。不要盲目重复安装：已存在时先用 `dsh plugin --profile desktop why @linxin666/dsh-client-ui-task-board` 检查。
+
+**不要把 GitLab 地址或 JIRA token 写进看板卡的 prompt**，凭据只放实例的 `config.json` 或环境变量。
 
 如果不装任务看板，则改用任意外部调度器定时运行 `guardian tick scan --commit --limit-items`，并由自己的脚本创建/续跑执行会话、消费 outbox；工具包仍可用，但本文 Step 6 的 DSH 看板操作不适用。
 
